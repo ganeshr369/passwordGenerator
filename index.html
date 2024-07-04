@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />   
+    <title>Password Generator - Ganesh Rawat</title>
+    <style>
+        .container {
+            max-width: 90%;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px 2px;
+        }
+
+        .head {
+            background: #52a4d4;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .head h3 {
+            color: #fff;
+            font-size: 2em;
+            text-transform: capitalize;
+            margin-bottom: 10px;
+        }
+
+        .head .para1 {
+            color: #fff;
+            font-size: 1.5em;
+            text-transform: capitalize;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+
+        .btn {
+            background-color: #52a4d4;
+            color: #fff;
+            margin: 50px 0px;
+            padding: 10px 10px;
+            border: 0;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #fff;
+            color: #52a4d4;
+            outline: 2px solid #52a4d4;
+        }
+
+        .result {
+            min-height: 120px;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.5em;
+            color: #52a4d4;
+            font-weight: bold;
+            border: 1px solid #52a4d4;
+            border-radius: 5px;
+            box-shadow: 0 0 10px 2px;
+            margin-bottom: 20px;
+
+        }
+
+        .result p {
+            font-size: 1.5em;
+        }
+
+        @media screen and (max-width: 900px) {
+            .head .para1 {
+                font-size: 0.8em;
+            }
+            .btn-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn {
+                margin: 10px 0px;
+            }
+            
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="head">
+            <h3>Password Generator </h3>
+            <p class="para1">Click the below button to generate diffirent password. 
+                I hope it will help to make your passoword strong</p>
+        </div>
+        <div class="btn-container">
+            <button class="btn" onclick="generateFunnyPassowrd()"> Generate a Funny password </button>
+            <button name="weak" class="btn" onclick="generateWeakPassword()"> Generate Weak Password</button>
+            <button name="strong" class="btn" onclick="generateStrongPassword()"> Generate Strong Password</button>
+            <button name="superStrong" class="btn" onclick="generateSuperStrongPassword()"> Generate Super Strong
+                Password</button>
+        </div>
+
+        <div class="result">
+            <p id="password"></p>
+        </div>
+    </div>
+    <script>
+        class Password {
+            constructor() {
+                this.weakChars = "abcdefghijklmnopqrstuvwxyz";
+                this.strongChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                this.superStrongChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+            }
+
+            generateWeakPassword(length = 8) {
+                return this._generatePassword(this.weakChars, length);
+            }
+
+            generateStrongPassword(length = 12) {
+                return this._generatePassword(this.strongChars, length);
+            }
+
+            generateSuperStrongPassword(length = 16) {
+                return this._generatePassword(this.superStrongChars, length);
+            }
+            generateFunnyPassowrd() {
+                const funnyWords = ["monkey", "passowrd", "try again", "incorrect", "correct", "nepal@budha", "hack my laptop", "nai malai tha xaina", "12345", "hello", "qwerty", "love", "mountain", "heart", "secret", "forget", "nothing", "asdf", "user", "doubleClick", "iforgot", "justDoIt", "yamaha", "saerching..", "loading..", "why?", "sorry", "iLoveYou3Thousands",];
+                return funnyWords[Math.floor(Math.random() * funnyWords.length)];
+            }
+
+            _generatePassword(chars, length) {
+                let password = '';
+                for (let i = 0; i < length; i++) {
+                    const randomIndex = Math.floor(Math.random() * chars.length)
+                    password += chars[randomIndex];
+                }
+                return password;
+            }
+        }
+
+        function updatePasswordField(password) {
+            document.getElementById("password").textContent = password;
+        }
+
+        function generateFunnyPassowrd() {
+            const password = new Password();
+            updatePasswordField(password.generateFunnyPassowrd());
+        }
+
+        function generateWeakPassword() {
+            const password = new Password();
+            updatePasswordField(password.generateWeakPassword());
+        }
+
+        function generateStrongPassword() {
+            const password = new Password();
+            updatePasswordField(password.generateStrongPassword());
+        }
+
+        function generateSuperStrongPassword() {
+            const password = new Password();
+            updatePasswordField(password.generateSuperStrongPassword());
+        }
+
+    </script>
+</body>
+
+</html>
